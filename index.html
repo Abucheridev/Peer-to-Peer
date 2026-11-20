@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peer to Peer — Client &amp; Mentor Dashboards, Struggles &amp; Skills</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container header-inner">
+      <div class="brand-block">
+        <div class="brand-mark" aria-hidden="true">P2P</div>
+        <div class="brand-text">
+          <span class="brand-name">Peer to Peer</span>
+          <span class="brand-tagline">Separate Client &amp; Mentor Dashboards &bull; Struggles &amp; Skills</span>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <span class="alias-chip" id="active-account-role-badge">Client Dashboard</span>
+        <button type="button" class="btn btn-secondary btn-sm" id="switch-to-client-dash-btn" aria-pressed="true">Client Dashboard</button>
+        <button type="button" class="btn btn-secondary btn-sm" id="switch-to-mentor-dash-btn" aria-pressed="false">Mentor Dashboard</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content" class="container main-layout" tabindex="-1">
+    <!-- Sign-Up Role Selection -->
+    <section class="panel-card" aria-labelledby="signup-role-heading">
+      <h1 id="signup-role-heading" class="view-title">Sign Up: Choose Client or Mentor</h1>
+      <p class="view-subtitle">
+        Select whether you are signing up as a <strong>Client</strong> (to get help with struggles or learn a skill) or as a <strong>Mentor</strong> (with two parts: <strong>Mentor</strong> for teaching learners and <strong>Guide</strong> for supporting habit struggles).
+      </p>
+
+      <form id="role-signup-form">
+        <div class="form-grid-3">
+          <div>
+            <label for="signup-display-name" class="field-label">Display Name or Alias</label>
+            <input type="text" id="signup-display-name" class="input-control" placeholder="e.g., Alex or QuietGuide" required />
+          </div>
+
+          <div>
+            <span class="field-label">Account Type</span>
+            <div class="inline-checks">
+              <label class="checkbox-row">
+                <input type="radio" name="signupAccountRole" value="client" checked />
+                <span><strong>Client</strong></span>
+              </label>
+              <label class="checkbox-row">
+                <input type="radio" name="signupAccountRole" value="mentor" />
+                <span><strong>Mentor</strong></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions-right">
+            <button type="submit" class="btn btn-primary btn-sm">Complete Sign Up &amp; Open Dashboard</button>
+          </div>
+        </div>
+        <p id="role-signup-status" class="muted-text small-text" role="status"></p>
+      </form>
+    </section>
+
+    <!-- DASHBOARD 1: CLIENT DASHBOARD (Struggles vs Skills Separated) -->
+    <section id="client-role-dashboard" class="panel-card" aria-labelledby="client-dash-heading">
+      <div class="panel-header-row">
+        <div>
+          <span class="eyebrow-tag">Dashboard 1 &bull; Client Account</span>
+          <h2 id="client-dash-heading" class="section-title">Client Dashboard</h2>
+        </div>
+      </div>
+
+      <fieldset class="field-group">
+        <legend class="field-label">Choose Your Path (Struggles and Skills Are Separate)</legend>
+        <div class="inline-checks">
+          <label class="checkbox-row">
+            <input type="radio" name="clientIntentTrack" value="struggle" checked />
+            <span><strong>I'm struggling with...</strong> (Habits &amp; Urges)</span>
+          </label>
+          <label class="checkbox-row">
+            <input type="radio" name="clientIntentTrack" value="learn" />
+            <span><strong>I want to learn...</strong> (Skills &amp; Growth)</span>
+          </label>
+        </div>
+      </fieldset>
+
+      <!-- Struggles Sub-Panel: "I'm struggling with..." + Dropdown + Text Box -->
+      <div id="client-struggle-panel" class="payout-method-panel">
+        <h3 class="sub-panel-title">I'm struggling with...</h3>
+        <div class="form-grid-2">
+          <div>
+            <label for="client-struggle-select" class="field-label">Select from dropdown menu</label>
+            <select id="client-struggle-select" class="select-control">
+              <option value="Porn & Compulsive Habits">Porn &amp; Compulsive Habits</option>
+              <option value="Masturbation Restraint">Masturbation Restraint</option>
+              <option value="Drug & Substance Urges">Drug &amp; Substance Urges</option>
+              <option value="Anger & Violence Management">Anger &amp; Violence Management</option>
+              <option value="Gaming Addiction">Gaming Addiction</option>
+              <option value="Stress & Anxiety">Stress &amp; Anxiety</option>
+              <option value="Late-Night Screen / Doomscrolling">Late-Night Screen / Doomscrolling</option>
+            </select>
+          </div>
+          <div>
+            <label for="client-struggle-text" class="field-label">Or write your own in text box</label>
+            <input
+              type="text"
+              id="client-struggle-text"
+              class="input-control"
+              placeholder="I'm struggling with..."
+            />
+          </div>
+        </div>
+        <p id="client-struggle-active-summary" class="muted-text small-text"></p>
+      </div>
+
+      <!-- Skills Sub-Panel: "I want to learn..." + Dropdown + Text Box -->
+      <div id="client-learn-panel" class="payout-method-panel is-hidden">
+        <h3 class="sub-panel-title">I want to learn...</h3>
+        <div class="form-grid-2">
+          <div>
+            <label for="client-learn-select" class="field-label">Select from dropdown menu</label>
+            <select id="client-learn-select" class="select-control">
+              <option value="Coding & Software">Coding &amp; Software</option>
+              <option value="Fitness & Movement">Fitness &amp; Movement</option>
+              <option value="Reading & Study Routines">Reading &amp; Study Routines</option>
+              <option value="Communication & Boundaries">Communication &amp; Boundaries</option>
+              <option value="Public Speaking & Confidence">Public Speaking &amp; Confidence</option>
+              <option value="Personal Finance & Budgeting">Personal Finance &amp; Budgeting</option>
+              <option value="Time Management & Deep Work">Time Management &amp; Deep Work</option>
+            </select>
+          </div>
+          <div>
+            <label for="client-learn-text" class="field-label">Or write your own in text box</label>
+            <input
+              type="text"
+              id="client-learn-text"
+              class="input-control"
+              placeholder="I want to learn..."
+            />
+          </div>
+        </div>
+        <p id="client-learn-active-summary" class="muted-text small-text"></p>
+      </div>
+
+      <div class="form-actions-right">
+        <button type="button" class="btn btn-primary btn-sm" id="client-apply-match-btn">Match &amp; Show Guides/Mentors</button>
+      </div>
+
+      <div id="client-matched-suggestions" class="custom-saved-list"></div>
+    </section>
+
+    <!-- DASHBOARD 2: MENTOR DASHBOARD (Two Parts: Mentor for Learners & Guide for Habit Struggles) -->
+    <section id="mentor-role-dashboard" class="panel-card is-hidden" aria-labelledby="mentor-dash-heading">
+      <div class="panel-header-row">
+        <div>
+          <span class="eyebrow-tag">Dashboard 2 &bull; Mentor Account</span>
+          <h2 id="mentor-dash-heading" class="section-title">Mentor Dashboard</h2>
+          <p class="muted-text small-text">
+            Switch between <strong>Mentor</strong> (teaching people who came to learn skills) and <strong>Guide</strong> (supporting people struggling with habits).
+          </p>
+        </div>
+        <div class="inline-checks">
+          <button type="button" class="btn btn-secondary btn-sm is-active" id="mentor-branch-teacher-btn" aria-pressed="true">
+            Part 1: Mentor (Teach Learners)
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="mentor-branch-guide-btn" aria-pressed="false">
+            Part 2: Guide (Habit Struggles)
+          </button>
+        </div>
+      </div>
+
+      <!-- Part 1: Mentor for people who want to learn -->
+      <div id="mentor-teacher-panel" class="payout-method-panel">
+        <h3 class="sub-panel-title">Mentor — For People Who Came to Learn</h3>
+        <div class="inline-checks">
+          <label class="checkbox-row"><input type="checkbox" name="mentorTeachTopic" value="Coding & Software" checked /> <span>Coding &amp; Software</span></label>
+          <label class="checkbox-row"><input type="checkbox" name="mentorTeachTopic" value="Fitness & Movement" /> <span>Fitness &amp; Movement</span></label>
+          <label class="checkbox-row"><input type="checkbox" name="mentorTeachTopic" value="Reading & Study Routines" /> <span>Reading &amp; Study Routines</span></label>
+          <label class="checkbox-row"><input type="checkbox" name="mentorTeachTopic" value="Communication & Boundaries" /> <span>Communication &amp; Boundaries</span></label>
+        </div>
+        <div>
+          <label for="mentor-teach-custom" class="field-label">Additional Skill You Teach</label>
+          <input type="text" id="mentor-teach-custom" class="input-control" placeholder="e.g., Web design, guitar, exam prep..." />
+        </div>
+        <p id="mentor-teach-summary" class="muted-text small-text"></p>
+      </div>
+
+      <!-- Part 2: Guide for people who are struggling with habits -->
+      <div id="mentor-guide-panel" class="payout-method-panel is-hidden">
+        <h3 class="sub-panel-title">Guide — For People Struggling with Habits</h3>
+        <div class="inline-checks">
+          <label class="checkbox-row"><input type="checkbox" name="mentorGuideTopic" value="Porn & Compulsive Habits" checked /> <span>Porn &amp; Compulsive Habits</span></label>
+          <label class="checkbox-row"><input type="checkbox" name="mentorGuideTopic" value="Masturbation Restraint" /> <span>Masturbation Restraint</span></label>
+          <label class="checkbox-row"><input type="checkbox" name="mentorGuideTopic" value="Drug & Substance Urges" /> <span>Drug &amp; Substance Urges</span></label>
+          <label class="checkbox-row"><input type="checkbox" name="mentorGuideTopic" value="Anger & Violence Management" /> <span>Anger &amp; Violence Management</span></label>
+          <label class="checkbox-row"><input type="checkbox" name="mentorGuideTopic" value="Gaming Addiction" /> <span>Gaming Addiction</span></label>
+          <label class="checkbox-row"><input type="checkbox" name="mentorGuideTopic" value="Stress & Anxiety" checked /> <span>Stress &amp; Anxiety</span></label>
+        </div>
+        <div>
+          <label for="mentor-guide-custom" class="field-label">Additional Habit Struggle You Guide</label>
+          <input type="text" id="mentor-guide-custom" class="input-control" placeholder="e.g., Late-night impulses, anger triggers..." />
+        </div>
+        <p id="mentor-guide-summary" class="muted-text small-text"></p>
+      </div>
+
+      <div class="form-grid-2">
+        <div>
+          <label for="mentor-role-rate" class="field-label">Hourly Rate (USD, 0 = Free Peer)</label>
+          <input type="number" id="mentor-role-rate" class="input-control" min="0" step="any" value="0" />
+        </div>
+        <div>
+          <label for="mentor-role-payout" class="field-label">Payout Method</label>
+          <select id="mentor-role-payout" class="select-control">
+            <option value="Bank Transfer">Bank Transfer</option>
+            <option value="PayPal">PayPal</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions-right">
+        <span id="mentor-role-status" class="muted-text small-text" role="status"></span>
+        <button type="button" class="btn btn-primary btn-sm" id="save-mentor-profile-btn">Save Mentor &amp; Guide Settings</button>
+      </div>
+    </section>
+
+    <!-- Directory & Search -->
+    <section class="panel-card" aria-labelledby="directory-heading">
+      <h2 id="directory-heading" class="section-title">Matching Circles &amp; Mentors</h2>
+      <div class="form-grid-2">
+        <div>
+          <label for="guide-search-input" class="field-label">Search</label>
+          <input type="search" id="guide-search-input" class="input-control" placeholder="Search struggles, skills, or mentors..." />
+        </div>
+        <div>
+          <label for="topic-filter-select" class="field-label">Topic</label>
+          <select id="topic-filter-select" class="select-control">
+            <option value="all">All Topics</option>
+            <option value="Porn & Compulsive Habits">Porn &amp; Compulsive Habits</option>
+            <option value="Masturbation Restraint">Masturbation Restraint</option>
+            <option value="Drug & Substance Urges">Drug &amp; Substance Urges</option>
+            <option value="Anger & Violence Management">Anger &amp; Violence Management</option>
+            <option value="Gaming Addiction">Gaming Addiction</option>
+            <option value="Stress & Anxiety">Stress &amp; Anxiety</option>
+            <option value="Coding & Software">Coding &amp; Software</option>
+            <option value="Fitness & Movement">Fitness &amp; Movement</option>
+            <option value="Reading & Study Routines">Reading &amp; Study Routines</option>
+            <option value="Communication & Boundaries">Communication &amp; Boundaries</option>
+          </select>
+        </div>
+      </div>
+      <div id="guides-grid" class="cards-grid"></div>
+    </section>
+  </main>
+
+  <script src="./app.js" defer></script>
+  <script src="./backup.js" defer></script>
+  <script src="./custom-guides.js" defer></script>
+  <script src="./roles.js" defer></script>
+</body>
+</html>
